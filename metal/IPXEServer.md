@@ -50,7 +50,7 @@ From the "Manage Servers" page find your systems's IP address and ssh to it, the
 
 ```
 apt-get update
-apt-get install apache2 rsync
+apt-get install apache2 rsync expect
 cd /var/www/html
 STXRELEASE8=mirror.starlingx.cengn.ca/mirror/starlingx/release/8.0.0
 wget https://$STXRELEASE8/debian/monolithic/outputs/iso/starlingx-intel-x86-64-cd.iso

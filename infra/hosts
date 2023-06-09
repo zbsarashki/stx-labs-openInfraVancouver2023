@@ -1,0 +1,81 @@
+# Your system has configured 'manage_etc_hosts' as True.
+# As a result, if you wish for changes to this file to persist
+# then you will need to either
+# a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+# b.) change or remove the value of 'manage_etc_hosts' in
+#     /etc/cloud/cloud.cfg or cloud-config from user-data
+#
+127.0.1.1 c3sxda-bsarashk c3sxda-bsarashk
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+
+139.178.82.181  c3sxda-tc0
+2604:1380:4642:a300::52 c3sxda-tc0
+
+147.28.183.239 c3sxda-tc1
+2604:1380:4642:a300::102 c3sxda-tc1
+
+147.28.183.209 c3sxda-tc2
+2604:1380:4642:a300::f2 c3sxda-tc2
+
+147.28.149.175 c3sxda-tc3
+2604:1380:4642:a300::b2  c3sxda-tc3
+
+145.40.102.77 c3sxda-tc4
+2604:1380:4642:a300::c2  c3sxda-tc4
+
+147.28.187.151 c3sxda-tc5
+2604:1380:4642:a300::62 c3sxda-tc5
+
+147.28.155.223 c3sxda-tc6
+2604:1380:4642:a300::92  c3sxda-tc6
+
+147.28.182.103 c3sxda-tc7
+2604:1380:4642:a300::42  c3sxda-tc7
+
+145.40.99.223 c3sxda-tc8
+2604:1380:4642:a300::122  c3sxda-tc8
+
+145.40.102.197 c3sxda-tc9
+2604:1380:4642:a300::d2  c3sxda-tc9
+
+147.28.183.109 c3sxda-tc10
+2604:1380:4642:a300::e2  c3sxda-tc10
+
+147.75.47.169 c3sxda-tc11
+2604:1380:4642:a300::72  c3sxda-tc11
+
+147.28.187.67 c3sxda-tc12
+2604:1380:4642:a300::82  c3sxda-tc12
+
+145.40.99.11 c3sxda-tc13
+2604:1380:4642:a300::112  c3sxda-tc13
+
+147.28.149.43 c3sxda-tc14
+2604:1380:4642:a300::a2  c3sxda-tc14
+
+147.75.35.7 c3sxda-tc15
+2604:1380:4642:a300::32  c3sxda-tc15
+
+147.75.53.5 c3sxda-tc16
+2604:1380:4642:a300::132 c3sxda-tc16
+
+147.75.53.15 c3sxda-tc17
+2604:1380:4642:a300::142 c3sxda-tc17
+
+147.28.183.229 c3sxda-tc18
+2604:1380:4642:a300::152 c3sxda-tc18
+
+147.28.183.237 c3sxda-tc19
+2604:1380:4642:a300::162 c3sxda-tc19
+
+147.28.155.117 c3sxda-tc20
+2604:1380:4642:a300::172 c3sxda-tc120
