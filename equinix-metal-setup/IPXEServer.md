@@ -127,12 +127,6 @@ StarlingX allows [prestaging](https://docs.starlingx.io/dist_cloud/kubernetes/pr
 
 In this setup, however, neither physical nor virtual media are applicable; hence, we resort to modifying a kickstarter file for this purpose.
 
-```
-cd /var/www/html
-wget http://147.75.55.91/stx8/kickstart/kickstart.cfg
-mv kickstart.cfg stx8/kickstart/kickstart.cfg
-```
-
 <br/>
 
 [Prev: Using Equinix Metal](using_equinix_metal.md)<br/>

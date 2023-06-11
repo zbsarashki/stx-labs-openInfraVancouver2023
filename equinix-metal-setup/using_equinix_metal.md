@@ -11,5 +11,7 @@ Follow the procedure outlined below to create and account and create the two on 
 
 ---
 1) Create [Equinix account and add ssh pub keys](EquinixAccountSSHPUBs.md)<br/>
-2) Create [Debian on Demand Metal](EquinixCustomIPXE.md) and setup ipxe server with StarlingX8<br/>
+2) Create [Debian on Demand Metal](IPXEServer.md) and setup ipxe server with StarlingX8<br/>
 3) Create on [StarlingX on Demand Metal](EquinixStarlingX.md)<br/>
+
+[Prev](../Readme.md)

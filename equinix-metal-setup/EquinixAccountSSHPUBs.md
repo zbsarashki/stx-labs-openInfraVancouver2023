@@ -22,4 +22,4 @@ From the landing page, GOTO Project Settings and SSH Keys
 
 <img align="center" width="700" height="400" src="pngs/projectSettings-SSHPubKeys.png"><br/>
 
-[Prev](../Readme.md)<br/>
+[Prev: Using Equinix Metal](using_equinix_metal.md)<br/>

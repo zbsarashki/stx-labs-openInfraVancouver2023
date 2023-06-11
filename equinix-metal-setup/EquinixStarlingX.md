@@ -31,5 +31,5 @@ da == dallas<br/>
 ***And Deploy the box***<br/>
 
 
-[Prev: Debian on Demand Metal](EquinixCustomIPXE.md)<br/>
+[Prev: Debian on Demand Metal](IPXEServer.md)<br/>
 [Prev: Using Equinix Metal](using_equinix_metal.md)<br/>
