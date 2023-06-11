@@ -72,4 +72,41 @@ source /etc/platform/openrc
 [sysadmin@controller-0 ~(keystone_admin)]$
 ```
 
+### Check custom / 3rd party application images
 
+```
+[sysadmin@controller-0 ~(keystone_admin)]$ system registry-image-list
++----------------------------------------------------------+
+| Image Name                                               |
++----------------------------------------------------------+
+| docker.io/fluxcd/helm-controller                         |
+| docker.io/fluxcd/source-controller                       |
+| docker.io/starlingx/armada-image                         |
+| docker.io/starlingx/n3000-opae                           |
+| docker.io/windse/cyclictest                              |
+| ghcr.io/helm/tiller                                      |
+| ghcr.io/k8snetworkplumbingwg/multus-cni                  |
+| ghcr.io/k8snetworkplumbingwg/sriov-cni                   |
+| ghcr.io/k8snetworkplumbingwg/sriov-network-device-plugin |
+| k8s.gcr.io/coredns/coredns                               |
+| k8s.gcr.io/defaultbackend-amd64                          |
+| k8s.gcr.io/etcd                                          |
+| k8s.gcr.io/ingress-nginx/controller                      |
+| k8s.gcr.io/ingress-nginx/kube-webhook-certgen            |
+| k8s.gcr.io/kube-apiserver                                |
+| k8s.gcr.io/kube-controller-manager                       |
+| k8s.gcr.io/kube-proxy                                    |
+| k8s.gcr.io/kube-scheduler                                |
+| k8s.gcr.io/pause                                         |
+| quay.io/calico/cni                                       |
+| quay.io/calico/kube-controllers                          |
+| quay.io/calico/node                                      |
+| quay.io/jetstack/cert-manager-acmesolver                 |
+| quay.io/jetstack/cert-manager-cainjector                 |
+| quay.io/jetstack/cert-manager-controller                 |
+| quay.io/jetstack/cert-manager-ctl                        |
+| quay.io/jetstack/cert-manager-webhook                    |
+| quay.io/k8scsi/snapshot-controller                       |
+| quay.io/stackanetes/kubernetes-entrypoint                |
++----------------------------------------------------------+
+```
