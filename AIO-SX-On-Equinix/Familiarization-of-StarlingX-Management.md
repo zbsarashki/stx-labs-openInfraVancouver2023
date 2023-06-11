@@ -2,7 +2,7 @@
 
 Get to know StarlingX Management services. There are two sections to
 this document; the first is familiarization of using the GUI and the
-second session is how to use the CLI to see the same inforamation.
+second session is how to use the CLI to see the same information.
 
 Useful links:
 - [CLI Reference](https://docs.starlingx.io/cli_ref/index.html)
@@ -47,11 +47,11 @@ Review and learn how to change the system configuration
 ![System Config](images/fam-system-configuration.png)
 
 From this tab the following changes can be performed
-- Address Pools - Create/update addresss pools for the hosts
+- Address Pools - Create/update address pools for the hosts
 - DNS - Edit the Cluster DNS
 - NTP - Edit NTP address ranges
 - OAM IP - View / Change the OAM IP address
-- Controller Filesystem - Modify / Update the Controller filesystem sizes
+- Controller File system - Modify / Update the Controller file system sizes
 
 ## Edit the System Name
 
