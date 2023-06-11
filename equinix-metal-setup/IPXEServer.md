@@ -121,13 +121,5 @@ boot
 EOF
 ```
 
-## Edit KickStarter files
-
-StarlingX allows [prestaging](https://docs.starlingx.io/dist_cloud/kubernetes/prestage-a-subcloud-using-dcmanager-df756866163f.html) of nodes with software packages and container image archives that are required for the deployment.  This is the typical installation mode for sub-clouds and starts by updating the default Install Media with update-iso.sh tool. The resultant media is then used to pre-install the sub-clouds. Its main purpose is to speed up the deployment process.
-
-In this setup, however, neither physical nor virtual media are applicable; hence, we resort to modifying a kickstarter file for this purpose.
-
-<br/>
-
 [Prev: Using Equinix Metal](using_equinix_metal.md)<br/>
 [Next: StarlingX on Demand Metal](EquinixStarlingX.md)<br/>
