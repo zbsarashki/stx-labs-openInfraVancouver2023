@@ -67,7 +67,7 @@ time ansible-playbook /usr/share/ansible/stx-ansible/playbooks/bootstrap.yml
 
 The stdout of the above command has been captured and is on the [JumpHost](http://147.75.35.13/logs). This is in addition to the ansible.log file on the controller.
 
-### Configure controller-0
+### LAB1: Configure controller-0
 
 In this step we will configure the node for the hands-on labs. To this end, we will configure the system with Ceph storage, and isolated CPU's.<br/>
 See [StarlingX Target List](../jumphost-setup/jumphost-targets.md) for ***Port numbers***
@@ -91,7 +91,7 @@ system host-unlock $C
 
 The above will reboot the system and apply the configuration. Next we will configure the system with Isolated CPU's and Ceph.
 
-Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status.
+Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [ceph storage](ceph_storage.md) and configure the system for [isolated cpus](isolated_cpus.md).
 
 # Labs
 

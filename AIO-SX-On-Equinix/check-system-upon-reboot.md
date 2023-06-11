@@ -75,6 +75,8 @@ source /etc/platform/openrc
 ### Check custom / 3rd party application images
 
 ```
+[sysadmin@controller-0 ~(keystone_admin)]$ crictl images | grep cyclictest
+registry.local:9001/docker.io/windse/cyclictest v1.0 078b7c45bbc0f 630MB
 [sysadmin@controller-0 ~(keystone_admin)]$ system registry-image-list
 +----------------------------------------------------------+
 | Image Name                                               |
