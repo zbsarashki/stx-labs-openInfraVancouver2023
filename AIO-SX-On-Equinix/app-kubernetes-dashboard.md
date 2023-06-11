@@ -111,11 +111,11 @@ dGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2Fy
 ![Paste Token](images/app-k8s-dashboard-paste-token.png)
 
 - Verify access to the dashboard
-![View](images/apps-k8s-dashboard-view.png)
+![View](images/app-k8s-dashboard-view.png)
 
 > NOTE: First time login change the Dropdown at the top left to "All Namespaces"
 
-![All Namespaces](images/apps-k8s-dashboard-allnamespaces.png)
+![All Namespaces](images/app-k8s-dashboard-allnamespaces.png)
 
 # Cleanup
 

@@ -42,3 +42,15 @@ This file overrides default values found in /usr/share/ansible/stx-ansible/playb
 
 
 # Ceph configuration
+
+# Once Installed Learn about StarlingX
+
+Now that StarlingX is installed lets learn about [managing a StarlingX Cluster](Familiarization-of-StarlingX-Management.md)
+
+# Example Apps
+
+- [Cyclic Test](app-cyclictest.md)
+- [StarlingX Hello Wold(app-hello-starlingx.md)
+- [Kubernetes Dashboard](app-kubernetes-dashboard.md)
+- [Persistent Strorage](app-hello-persistent-storage.md)
+- [Install Metrix Server](https://docs.starlingx.io/admintasks/kubernetes/kubernetes-admin-tutorials-metrics-server.html)

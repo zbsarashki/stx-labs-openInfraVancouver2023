@@ -47,7 +47,7 @@ spec:
     - port: 80
       protocol: TCP
       targetPort: 80
-      nodePort: 31115
+      nodePort: 30001
   selector:
     app: hellodeployment
 EOF
@@ -67,7 +67,7 @@ Validate the container is accessible by using curl or a browser to access the co
 
 ```
 IP=$(source /etc/platform/openrc;system oam-show |grep oam_ip | awk '{ print $4 }')
-curl http://$IP:31115
+curl http://$IP:30001
 ```
 
 ### Example Output
