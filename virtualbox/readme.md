@@ -84,7 +84,7 @@ By default start.sh uses socat to use the serial port.  This can be changed; see
 
 # First time log in
 
-Once the software is installed the system will reboot.  To log into the system for the first time use username sysadmin and password sysadmin.  When prompted set the password.  For this document we are using "St8rlingX*"
+Once the software is installed the system will reboot.  To log into the system for the first time use username sysadmin and password sysadmin.  When prompted set the password.  For this document we are using "St8rlingX\*"
 
 ![Password Change](./images/initial_password.png)
 

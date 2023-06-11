@@ -10,7 +10,7 @@ Agenda:
 	- The [hello-starlingx](AIO-SX-On-Equinix/app-hello-starlingx.md)
 	- Ceph [persistent-storage](AIO-SX-On-Equinix/app-hello-persistent-starlingx.md)
 	- Kubernetes [dashboard](AIO-SX-On-Equinix/app-kubernetes-dashboard.md)
-	- Scheduling and jitter latency [cyclitest and jitter](AIO-SX-On-Equinix/app-cyclitest.md)
+	- Scheduling and jitter latency [cyclictest and jitter](AIO-SX-On-Equinix/app-cyclitest.md)
 
 ---
 Left as exercise:

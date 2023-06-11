@@ -12,7 +12,7 @@ This machine has been setup to serve as JumpHost, [IPXE server](../equinix-metal
 
 ---
 
-The JumpHost /var/www/html with the following directory Structure:
+The JumpHost:/var/www/html has the following directory Structure:
 
 ```
 .
@@ -36,8 +36,8 @@ The JumpHost /var/www/html with the following directory Structure:
 ***Where:***<br/>
 ***nodes/:***		Network interface config files.<br/>
 ***overrides/:***	Localhost Override files<br/>
-***scripts/:***		Helper scripts to perform the initial host-level configuration including prestaging are found under <br/>
-***hosts:*** Extracted from /etc/hosts
+***scripts/:***		Helper scripts to perform initial host-level configuration including prestaging and bootstraping<br/>
+***hosts:*** Target IP's
 
 
 ## Tasks performed by the jump host:
@@ -56,7 +56,7 @@ Copies user configuration overrides for the Ansible bootstrap playbook to sysadm
 
 ### Bootstrap
 
-Bootstraps target but does not complete the deployment. Deployment of the target is left as a exercise.
+Bootstraps target but does not complete the deployment. Deployment of the target is left as an exercise.
 
 [Prev](../Readme.md)
 
