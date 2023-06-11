@@ -1,4 +1,8 @@
 system_mode: simplex
+name: "c3sxda-tc8"
+description: "STX8 Standalone SX"
+location: "Dallas"
+contact: "babak.sarashki@windriver.com"
 timezone: UTC
 
 dns_servers:
