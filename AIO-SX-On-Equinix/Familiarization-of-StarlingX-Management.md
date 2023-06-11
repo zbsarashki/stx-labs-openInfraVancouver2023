@@ -88,10 +88,9 @@ View Events
 
 ## Log in to the SSH
 
-To log in using SSH use the assigned address.  For example `ssh sysadmin@147.75.35.13 -p 2201`  The username is sysadmin password is `St8rlingX*`
+To log in using SSH use the assigned address.  For example `ssh sysadmin@147.75.35.13 -p 2201`  The username is `sysadmin` password is `St8rlingX*`
 
 ```
-Warning: Permanently added '[147.75.35.13]:2201' (ED25519) to the list of known hosts.
 Release 22.12
 ------------------------------------------------------------------------
 W A R N I N G *** W A R N I N G *** W A R N I N G *** W A R N I N G ***
