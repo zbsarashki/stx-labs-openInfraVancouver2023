@@ -50,7 +50,7 @@ Now that StarlingX is installed lets learn about [managing a StarlingX Cluster](
 # Example Apps
 
 - [Cyclic Test](app-cyclictest.md)
-- [StarlingX Hello Wold(app-hello-starlingx.md)
+- [StarlingX Hello World](app-hello-starlingx.md)
 - [Kubernetes Dashboard](app-kubernetes-dashboard.md)
 - [Persistent Strorage](app-hello-persistent-storage.md)
 - [Install Metrix Server](https://docs.starlingx.io/admintasks/kubernetes/kubernetes-admin-tutorials-metrics-server.html)
