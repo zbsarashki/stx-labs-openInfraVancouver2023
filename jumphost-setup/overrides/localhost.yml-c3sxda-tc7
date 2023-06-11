@@ -1,0 +1,22 @@
+system_mode: simplex
+timezone: UTC
+
+dns_servers:
+  - "2001:4860:4860::8888"
+  - "2001:4860:4860::8844"
+
+external_oam_subnet: "2604:1380:4642:a300::100/124"
+external_oam_gateway_address: "2604:1380:4642:a300::101"
+external_oam_floating_address: "2604:1380:4642:a300::102"
+
+management_subnet: "fd00:4888:2000:1090::/64"
+management_start_address: "fd00:4888:2000:1090::a"
+management_end_address: "fd00:4888:2000:1090::ffff"
+management_multicast_subnet: "ff05::18:1:0/64"
+
+cluster_host_subnet: "fd00:4888:2000:109a::/64"
+cluster_pod_subnet: "fd00:4888:2000:109b::/64"
+cluster_service_subnet: "fd00:4888:2000:109b::/112"
+
+admin_password: St8rlingX*
+ansible_become_pass: St8rlingX*

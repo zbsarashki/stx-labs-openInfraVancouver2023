@@ -1,0 +1,7 @@
+auto enp1s0f0
+iface enp1s0f0 inet6 static
+address 2604:1380:4642:a300::72
+netmask 124
+gateway 2604:1380:4642:a300::71
+mtu 1500
+post-up echo 0 > /proc/sys/net/ipv6/conf/enp1s0f0/autoconf; echo 0 > /proc/sys/net/ipv6/conf/enp1s0f0/accept_ra; echo 0 > /proc/sys/net/ipv6/conf/enp1s0f0/accept_redirects
