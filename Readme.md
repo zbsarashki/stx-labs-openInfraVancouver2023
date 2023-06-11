@@ -38,7 +38,7 @@ Hand-on Labs:
 Left as exercise:
 ---
 - StarlingX on [libvirt](libvirt/README.md) 
-- StarlingX on [virutalbox](virtualbox/reademe.md)
+- StarlingX on [virtualbox](virtualbox/readme.md)
 ---
 Workspace setup:
 ---
