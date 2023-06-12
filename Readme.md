@@ -1,12 +1,10 @@
-# <p style="text-align: center;">OpenInfra Summit<br/>Vancouver  2023<br/>StarlingX Hands-on Lab<br/>Open Infrastructure Project Workspaces<br/><br/></p>
+# OpenInfra Summit Vancouver 2023 StarlingX Hands-on Lab Open Infrastructure Project Workspaces
 
-Lab 0: Access the controller node: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for ***Port numbers***
+Verify access to the controller node: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for ***Port numbers***
 
 ```
-alias scpp='sshpass -p St8rlingX* scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '
-alias sshp='sshpass -p St8rlingX* ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '
-
-sshp sysadmin@147.75.35.13 -p <SSH PROXY PORT> cat /etc/build.info
+ssh sysadmin@147.75.35.13 -p <SSH PROXY PORT> cat /etc/build.info
+Password: St8rlingX*
 ```
 Expected Result:
 
