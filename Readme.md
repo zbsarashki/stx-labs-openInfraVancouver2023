@@ -28,11 +28,6 @@ BUILD_DATE="2023-02-11 04:52:08 +0000"
 Hand-on Labs:
 
 - [AIO-Simplex](AIO-SX-On-Equinix/README.md) installation and deployment flow
-- Familiarization of [StarlingX Managment](AIO-SX-On-Equinix/Familiarization-of-StarlingX-Management.md)
-- The [hello-starlingx](AIO-SX-On-Equinix/app-hello-starlingx.md)
-- Ceph [persistent-storage](AIO-SX-On-Equinix/app-hello-persistent-storage.md)
-- Kubernetes [dashboard](AIO-SX-On-Equinix/app-kubernetes-dashboard.md)
-- Scheduling and jitter latency [cyclictest and jitter](AIO-SX-On-Equinix/app-cyclictest.md)
 
 ---
 Left as exercise:
