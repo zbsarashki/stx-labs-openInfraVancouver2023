@@ -16,7 +16,9 @@ expect "root*:/var/home/sysadmin# " { send "wget http://$IPXESRV/prestageimages.
 expect "root*:/var/home/sysadmin# " { send "tar -C $BKUP -xzpf prestageimages.tar.gz\r"}
 expect "root*:/var/home/sysadmin# " { send "tar -C $BKUP -xzpf $BKUP/ostree_repo.tar.gz\r"}
 expect "root*:/var/home/sysadmin# " { send "rm -f $BKUP/ostree_repo.tar.gz\r"}
-expect "root*:/var/home/sysadmin# " { send "rm -f prestageimages.tar.gz\r"}
 expect "root*:/var/home/sysadmin# " { send "reboot\r"}
 expect "root*:/var/home/sysadmin# " { send "exit\r" }
 EOD
+
+rm -f $0
+rm -f prestageimages.tar.gz
