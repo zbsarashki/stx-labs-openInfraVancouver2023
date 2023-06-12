@@ -9,14 +9,7 @@ Install and bootstrap overview:
 4. Configure the controller node<br/>
 5. Unlock the controller node<br/>
 
-
-For details on the Equninix metal installs and bootstrap see [Jumphost](../jumphost-setup/jump-host.md).<br/>
-For details on simplex installation, see:<br/>
-- [StarlingX on libvirt](../libvirt/README.md)<br/>
-- [StarlingX on virutalbox](../virtualbox/readme.md)<br/>
-- And visit the [StarlingX Installation and deployment guide](https://docs.starlingx.io/deploy_install_guides/index-install-e083ca818006.html) page. <br/>
-
-For the purpose of time, steps 1 through 3 have been completed and we will start with step 4. But first, let's go over the ansible override file.
+For the purpose of time, steps 1 through 2 have been completed and we will start with step 3. But first, let's go over the ansible override file.
 
 ### Ansible override file: /home/sysadmin/localhost.yml
 
@@ -67,7 +60,7 @@ time ansible-playbook /usr/share/ansible/stx-ansible/playbooks/bootstrap.yml
 
 The stdout of the above command has been captured and is on the [JumpHost](http://147.75.35.13/logs). This is in addition to the ansible.log file on the controller.
 
-### LAB1: Configure controller-0
+### Configure controller-0
 
 In this step we will configure the node for the hands-on labs. To this end, we will configure the system with Ceph storage, and isolated CPU's.<br/>
 See [StarlingX Target List](../jumphost-setup/jumphost-targets.md) for ***Port numbers***
@@ -94,9 +87,9 @@ The above will reboot the system and apply the configuration. Next we will confi
 
 Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [Ceph based persistent sotrage backend](#Ceph-based-persistent-storage-backend)  and configure the system for [Isolated cpus](#IsolatedCPUs).
 
-### Ceph based persistent storage backend
+### Persistent storage backend
 
-In this step we will add Persistent Ceph Storage. To this end, start by reviewing the server available disks:
+In this step we will add Persistent Storage. To this end, start by reviewing the server available disks:
 
 #### From command line:
 
@@ -127,7 +120,7 @@ system host-stor-add controller-0 osd <disk uuid>
 ---
 ### IsolatedCPUs
 
-StarlingX supports isolating CPU cores from the underlying Linux and Kubernetes schedulers, and from interrupts by setting the IRQ-affinity. This is a run-to-completion model is best suited for vRAN uses-cases such as Intel's FlexRAN and NVIDIA's AerialSDK, among others. In this segment we will Isolate a number of CPU's.
+StarlingX supports isolating CPU cores through the isolcpu kernel command line. This is best suited for vRAN uses-cases such as Intel's FlexRAN and NVIDIA's AerialSDK, among others. In this segment we will Isolate a number of CPU's.
 
 #### First List CPU's
 
@@ -159,11 +152,23 @@ StarlingX supports isolating CPU cores from the underlying Linux and Kubernetes 
 
 #### Isolate 4 CPU Cores
 
+##### Lock the host
+
 ```
 system host-lock controller-0
+```
+##### Wait until node is locked
+```
+[sysadmin@controller-0 ~(keystone_admin)]$ system host-list
++----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | locked         | disabled    | online       |
++----+--------------+-------------+----------------+-------------+--------------+
+```
+##### Now Isolate the CPU's
+```
 system host-cpu-modify controller-0 -f application-isolated -p0 4
-
-
 ```
 
 ##### Expected results:
@@ -196,9 +201,14 @@ system host-cpu-modify controller-0 -f application-isolated -p0 4
 
 #### Complete the process and Unlock the host
 
+#### Assign labels for Kubernetes scheduler
 ```
 system host-label-assign controller-0 kube-cpu-mgr-policy=static
 system host-label-assign controller-0 kube-topology-mgr-policy=restricted
+```
+
+#### Unlock the host
+```
 system host-unlock controller-0
 ```
 ---
