@@ -86,26 +86,127 @@ C=controller-0
 
 system host-if-modify $C $OAMIF -n oam0 -c platform
 system interface-network-assign $C oam0 oam
+system ntp-modify ntpservers=0.pool.ntp.org,1.pool.ntp.org
 system host-unlock $C
 ```
 
 The above will reboot the system and apply the configuration. Next we will configure the system with Isolated CPU's and Ceph.
 
-Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [ceph storage](ceph_storage.md) and configure the system for [isolated cpus](isolated_cpus.md).
+Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [Ceph based persistent sotrage backend](#Ceph-based-persistent-storage-backend)  and configure the system for [Isolated cpus](#IsolatedCPUs).
 
-# Labs
+### Ceph based persistent storage backend
+
+In this step we will add Persistent Ceph Storage. To this end, start by reviewing the server available disks:
+
+#### From command line:
+
+```
+source /etc/platform/openrc
+system host-disk-list controller-0
+```
+
+<img align="center" width="1000" height="120" src="images/system-host-disk-list.png"><br/>
 
 
-# Ceph configuration
+##### Add storage backend
+```
+system storage-backend-add ceph --confirmed
+```
+<img align="center" width="1000" height="120" src="images/storage-backend-add.png"><br/>
 
-# Once Installed Learn about StarlingX
 
-Now that StarlingX is installed lets learn about [managing a StarlingX Cluster](Familiarization-of-StarlingX-Management.md)
+##### Add OSD
 
-# Example Apps
+```
+# use: system host-disk-list to list the systems disks and obtain the disk uuid
+system host-stor-add controller-0 osd <disk uuid>
+```
+
+<img align="center" width="1000" height="520" src="images/host-stor-add.png"><br/>
+
+---
+### IsolatedCPUs
+
+StarlingX supports isolating CPU cores from the underlying Linux and Kubernetes schedulers, and from interrupts by setting the IRQ-affinity. This is a run-to-completion model is best suited for vRAN uses-cases such as Intel's FlexRAN and NVIDIA's AerialSDK, among others. In this segment we will Isolate a number of CPU's.
+
+#### First List CPU's
+
+```
+[sysadmin@controller-0 ~(keystone_admin)]$ system host-cpu-list controller-0
++------...---+-------+-----------+-------+--------+---------...------------+-------------------+
+| uuid ...   | log_c | processor | phy_c | thread | processo...            | assigned_function |
+|      ...   | ore   |           | ore   |        |         ...            |                   |
++------...---+-------+-----------+-------+--------+---------...------------+-------------------+
+| bd668...70 | 0     | 0         | 0     | 0      | Intel(R)...  @ 3.40GHz | Platform          |
+| 2b3c2...15 | 1     | 0         | 1     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| 56eff...af | 2     | 0         | 2     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| 0abc1...0b | 3     | 0         | 3     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| ea4c0...b5 | 4     | 0         | 4     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| e6082...ad | 5     | 0         | 5     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| 33f3d...ed | 6     | 0         | 6     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| 59677...74 | 7     | 0         | 7     | 0      | Intel(R)...  @ 3.40GHz | Application       |
+| 362cc...51 | 8     | 0         | 0     | 1      | Intel(R)...  @ 3.40GHz | Platform          |
+| bf866...11 | 9     | 0         | 1     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 2d43d...d0 | 10    | 0         | 2     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 8063c...e6 | 11    | 0         | 3     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 134cf...78 | 12    | 0         | 4     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 45d24...7e | 13    | 0         | 5     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 9d262...d1 | 14    | 0         | 6     | 1      | Intel(R)...  @ 3.40GHz | Application       |
+| 222b1...57 | 15    | 0         | 7     | 1      | Intel(R)...  @ 3.40GHz | Application       |
++------...---+-------+-----------+-------+--------+---------...------------+-------------------+
+```
+
+
+#### Isolate 4 CPU Cores
+
+```
+system host-lock controller-0
+system host-cpu-modify controller-0 -f application-isolated -p0 4
+
+
+```
+
+##### Expected results:
+
+```
+[sysadmin@controller-0 ~(keystone_admin)]$ host-cpu-modify controller-0 -f application-isolated -p0 4
++------...---+-------+-----------+-------+--------+---------...------------+----------------------+
+| uuid ...   | log_c | processor | phy_c | thread | processo...            | assigned_function    |
+|      ...   | ore   |           | ore   |        |         ...            |                      |
++------...---+-------+-----------+-------+--------+---------...------------+----------------------+
+| bd668...70 | 0     | 0         | 0     | 0      | Intel(R)...  @ 3.40GHz | Platform             |
+| 2b3c2...15 | 1     | 0         | 1     | 0      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 56eff...af | 2     | 0         | 2     | 0      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 0abc1...0b | 3     | 0         | 3     | 0      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| ea4c0...b5 | 4     | 0         | 4     | 0      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| e6082...ad | 5     | 0         | 5     | 0      | Intel(R)...  @ 3.40GHz | Application          |
+| 33f3d...ed | 6     | 0         | 6     | 0      | Intel(R)...  @ 3.40GHz | Application          |
+| 59677...74 | 7     | 0         | 7     | 0      | Intel(R)...  @ 3.40GHz | Application          |
+| 362cc...51 | 8     | 0         | 0     | 1      | Intel(R)...  @ 3.40GHz | Platform             |
+| bf866...11 | 9     | 0         | 1     | 1      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 2d43d...d0 | 10    | 0         | 2     | 1      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 8063c...e6 | 11    | 0         | 3     | 1      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 134cf...78 | 12    | 0         | 4     | 1      | Intel(R)...  @ 3.40GHz | Application-isolated |
+| 45d24...7e | 13    | 0         | 5     | 1      | Intel(R)...  @ 3.40GHz | Application          |
+| 9d262...d1 | 14    | 0         | 6     | 1      | Intel(R)...  @ 3.40GHz | Application          |
+| 222b1...57 | 15    | 0         | 7     | 1      | Intel(R)...  @ 3.40GHz | Application          |
++------...---+-------+-----------+-------+--------+---------...------------+----------------------+
+
+```
+
+#### Complete the process and Unlock the host
+
+```
+system host-label-assign controller-0 kube-cpu-mgr-policy=static
+system host-label-assign controller-0 kube-topology-mgr-policy=restricted
+system host-unlock controller-0
+```
+---
+
+### Example Apps
 
 - [Cyclic Test](app-cyclictest.md)
 - [StarlingX Hello World](app-hello-starlingx.md)
 - [Kubernetes Dashboard](app-kubernetes-dashboard.md)
-- [Persistent Strorage](app-hello-persistent-storage.md)
-- [Install Metrix Server](https://docs.starlingx.io/admintasks/kubernetes/kubernetes-admin-tutorials-metrics-server.html)
+- [Persistent Storage](app-hello-persistent-storage.md)
+- [Install Matrix Server](https://docs.starlingx.io/admintasks/kubernetes/kubernetes-admin-tutorials-metrics-server.html)

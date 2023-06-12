@@ -30,9 +30,9 @@ Hand-on Labs:
 - [AIO-Simplex](AIO-SX-On-Equinix/README.md) installation and deployment flow
 - Familiarization of [StarlingX Managment](AIO-SX-On-Equinix/Familiarization-of-StarlingX-Management.md)
 - The [hello-starlingx](AIO-SX-On-Equinix/app-hello-starlingx.md)
-- Ceph [persistent-storage](AIO-SX-On-Equinix/app-hello-persistent-starlingx.md)
+- Ceph [persistent-storage](AIO-SX-On-Equinix/app-hello-persistent-storage.md)
 - Kubernetes [dashboard](AIO-SX-On-Equinix/app-kubernetes-dashboard.md)
-- Scheduling and jitter latency [cyclictest and jitter](AIO-SX-On-Equinix/app-cyclitest.md)
+- Scheduling and jitter latency [cyclictest and jitter](AIO-SX-On-Equinix/app-cyclictest.md)
 
 ---
 Left as exercise:
