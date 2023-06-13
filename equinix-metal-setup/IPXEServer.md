@@ -9,7 +9,7 @@ In this segment, we will provision a Debian Metal and setup ipxe with Starlingx.
 - Provision on Demand Equinix Metal with Debian
 - Setup ipxe
 	- Install http / apache2
-	- Download and setup starlingX install media for ipxe server
+	- Download and setup StarlingX install media for IPXE server
 	- Create boot.php and update index.html
 	- Edit kick starter files
 
@@ -46,7 +46,7 @@ da == dallas<br/>
 ## Setup IPXE
 ### Install http / apache2
 
-From the "Manage Servers" page find your systems's IP address and ssh to it, thereafter:
+From the "Manage Servers" page find your system's IP address and ssh to it, thereafter:
 
 ```
 apt-get update

@@ -12,7 +12,7 @@ Accept the invitation email from support@equinix.com and create an account.
 
 ---
 
-Once the above step is complete and you have your email vailated, login to equinix and add your pub ssh-key.
+Once the above step is complete and you have your email validated, login to equinix and add your pub ssh-key.
 
 From the landing page, GOTO Project Settings and SSH Keys
 

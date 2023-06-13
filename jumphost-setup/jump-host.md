@@ -36,7 +36,7 @@ The JumpHost:/var/www/html has the following directory Structure:
 ***Where:***<br/>
 ***nodes/:***		Network interface config files.<br/>
 ***overrides/:***	Localhost Override files<br/>
-***scripts/:***		Helper scripts to perform initial host-level configuration including prestaging and bootstraping<br/>
+***scripts/:***		Helper scripts to perform initial host-level configuration including prestaging and bootstrapping<br/>
 ***hosts:*** Target IP's
 
 

@@ -77,7 +77,7 @@ curl http://$IP:30001
 ```
 
 ## Using Web Browser from a machine that can access the Cloud
-Open a web browswer to the floating IP Address (http://<Controller FIP>:31115
+Open a web browser to the floating IP Address (http://<Controller FIP>:31115
 
 ![Image missing](images/app-helloworld-web.png)
 

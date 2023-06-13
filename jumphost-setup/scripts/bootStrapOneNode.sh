@@ -9,4 +9,4 @@ ANSIBLECMD="ANSIBLE_LOG_PATH=~/ansible_$(date "+%Y%m%d%H%M%S").log ansible-playb
 $scpp scripts/cpuset.sh  sysadmin@c3sxda-tc$1:~/cpusetfreq.sh
 $sshp sysadmin@c3sxda-tc$1 ./cpusetfreq.sh
 
-$sshp sysadmin@c3sxda-tc$1 time $ANSIBLECMD > logs/c3sxda-tc$1.boostrap_$(date "+%Y%m%d%H%M%S").log
+$sshp sysadmin@c3sxda-tc$1 time $ANSIBLECMD > logs/c3sxda-tc$1.bootstrap_$(date "+%Y%m%d%H%M%S").log

@@ -21,7 +21,7 @@ For the naming of the host, follow this rule for Targets:
 
 Name your server as: c3sxda-\<your username\>-***stx***, where<br/>
 c3sx == c3.small.x86<br/>
-da == dallas<br/>
+da == Dallas<br/>
 
 ### Ensure ipv6 prefix is /124<br/>
 

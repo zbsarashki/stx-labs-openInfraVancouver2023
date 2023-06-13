@@ -45,6 +45,8 @@ ansible_become_pass: St8rlingX*
 
 additional_local_registry_images:
   - windse/cyclictest:v1.0
+  - kubernetesui/dashboard:ubuntu_bionic-20220802
+  - kubernetesui/metrics-scraper:v1.0.8
 ```
 
 
@@ -85,7 +87,7 @@ system host-unlock $C
 
 The above will reboot the system and apply the configuration. Next we will configure the system with Isolated CPU's and Ceph.
 
-Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [Ceph based persistent sotrage backend](#Ceph-based-persistent-storage-backend)  and configure the system for [Isolated cpus](#IsolatedCPUs).
+Upon reboot, [check system](check-system-upon-reboot.md) for any alarms and system status. If no errors are found, proceed with [Ceph based persistent storage backend](#Ceph-based-persistent-storage-backend)  and configure the system for [Isolated CPUs](#IsolatedCPUs).
 
 ### Persistent storage backend
 

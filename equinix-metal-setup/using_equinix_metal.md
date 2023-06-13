@@ -2,16 +2,16 @@
 
 ---
 
-StarlingX installation on Equinix Metal requires custom-ipxe setup. To this end, an invitation email to join the project has been sent out from support@equninix.com. Once the invitation is accepted, login and add your ssh-key to the project. Thereafter, povision two systems:
+StarlingX installation on Equinix Metal requires custom-ipxe setup. To this end, an invitation email to join the project has been sent out from support@equninix.com. Once the invitation is accepted, login and add your ssh-key to the project. Thereafter, provision two systems:
 
 0) One c3.small.x86 with debian/ubuntu for ipxe
 1) One c3.small.x86 for the StarlingX AIO-Simplex target.
 
-Follow the procedure outlined below to create and account and create the two on demand servers. We will use these systems through the handson. 
+Follow the procedure outlined below to create and account and create the two on demand servers. We will use these systems through the hands-on. 
 
 ---
 1) Create [Equinix account and add ssh pub keys](EquinixAccountSSHPUBs.md)<br/>
-2) Create [Debian on Demand Metal](IPXEServer.md) and setup ipxe server with StarlingX8<br/>
+2) Create [Debian on Demand Metal](IPXEServer.md) and setup ipxe server with StarlingX<br/>
 3) Create on [StarlingX on Demand Metal](EquinixStarlingX.md)<br/>
 
 [Prev](../Readme.md)
