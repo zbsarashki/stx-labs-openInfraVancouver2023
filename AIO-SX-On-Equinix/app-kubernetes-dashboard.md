@@ -2,16 +2,31 @@
 - [Dashboard development page](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
 - [Credit original work](https://computingforgeeks.com/how-to-install-kubernetes-dashboard-with-nodeport/)
 
+## Create the docker registry secret
+
+> NOTE: The registry secret only needs to be created once and is used for all the app examples.  
+
+```
+kubectl create namespace kubernetes-dashboard
+PASSWORD=St8rlingX*
+kubectl -n kubernetes-dashboard create secret docker-registry admin-registry-secret \
+      --docker-server=registry.local:9001 --docker-username=admin --docker-password=$PASSWORD \
+      --docker-email=noreply@windriver.com
+
+```
+
 # Create the pod
 
-## Get the version
+## Copy the yaml file to the controller
+
+For Example
 ```
-VER=$(curl -s https://api.github.com/repos/kubernetes/dashboard/releases/latest|grep tag_name|cut -d '"' -f 4)
+scp -P 2201 yamls/app-kubernetes-dashboard/recommended.yaml sysadmin@147.75.35.13:.
 ```
 
 ## Create the pod
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/$VER/aio/deploy/recommended.yaml
+kubectl apply -f recommended.yaml
 ```
 
 ## Create a patch that changes the  kubernetes-dashboard service to use a NodePort 
@@ -123,4 +138,17 @@ dGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2Fy
 kubectl delete -f adminuser.yaml
 kubectl delete -n  kubernetes-dashboard -f dashboard-admin-rolebinding.yaml 
 kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+
+
+# Additionl Notes
+
+## Get the current version of the yaml file 
+```
+VER=$(curl -s https://api.github.com/repos/kubernetes/dashboard/releases/latest|grep tag_name|cut -d '"' -f 4)
+```
+
+## Download the yaml file
+```
+wget https://raw.githubusercontent.com/kubernetes/dashboard/$VER/aio/deploy/recommended.yaml
 ```

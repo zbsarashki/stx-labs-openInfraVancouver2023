@@ -2,55 +2,26 @@
 
 This is a very simple example of how to expose node port from the primary CNI to access the pod
 
-# Deploy
-## From the active Controller, Create a Deployment for the App
+# Copy the files to the controller
+
+For example:
 
 ```
-cat <<EOF > hello-deployment.yaml 
-apiVersion: apps/v1 # for versions before 1.6.0 use extensions/v1beta1
-kind: Deployment
-metadata:
-  name: hellodeployment
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: hellodeployment
-  template:
-    metadata:
-      labels:
-        app: hellodeployment
-    spec:
-      containers:
-      - name: hellostarlingx
-        image: windse/starlingx-nodeinfo:v1.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-          protocol: TCP
-EOF
+scp -P 2201 sysadmin@147.75.35.13:yamls/app-hello-starlingx/*.yaml
 ```
 
-## From the active Controller, Create the node port for outside access
+# From the active Controller, Deploy
+
+## Create the docker registry secret
+
+> NOTE: The registry secret only needs to be created once and is used for all the app examples.  
 
 ```
-cat <<EOF > nodeport.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: nodeport
-  labels:
-    app: hellodeployment
-spec:
-  type: NodePort
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 80
-      nodePort: 30001
-  selector:
-    app: hellodeployment
-EOF
+PASSWORD=St8rlingX*
+kubectl create secret docker-registry admin-registry-secret \
+      --docker-server=registry.local:9001 --docker-username=admin --docker-password=$PASSWORD \
+      --docker-email=noreply@windriver.com
+
 ```
 
 # From the active Controller, Launch the application
@@ -62,6 +33,15 @@ kubectl apply -f nodeport.yaml
 
 # Validate
 Validate the container is accessible by using curl or a browser to access the container
+
+## Verify the containers are running
+
+```
+kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+hellodeployment-8d95c89db-nr6kh   1/1     Running   0          8s
+hellodeployment-8d95c89db-vdgjj   1/1     Running   0          8s
+```
 
 ## Using curl
 
@@ -86,4 +66,5 @@ Open a web browser to the floating IP Address (http://<Controller FIP>:31115
 ```
 kubectl delete -f nodeport.yaml
 kubectl delete -f hello-deployment.yaml 
+kubectl delete  secret docker-registry admin-registry-secret
 ```
