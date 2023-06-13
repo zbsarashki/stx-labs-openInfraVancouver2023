@@ -9,9 +9,9 @@ dns_servers:
   - "2001:4860:4860::8888"
   - "2001:4860:4860::8844"
 
-external_oam_subnet: "2604:1380:4642:a300::100/124"
-external_oam_gateway_address: "2604:1380:4642:a300::101"
-external_oam_floating_address: "2604:1380:4642:a300::102"
+external_oam_subnet: "2604:1380:4642:a300::a0/124"
+external_oam_gateway_address: "2604:1380:4642:a300::a1"
+external_oam_floating_address: "2604:1380:4642:a300::a2"
 
 management_subnet: "fd00:4888:2000:1090::/64"
 management_start_address: "fd00:4888:2000:1090::a"
@@ -24,3 +24,8 @@ cluster_service_subnet: "fd00:4888:2000:109b::/112"
 
 admin_password: St8rlingX*
 ansible_become_pass: St8rlingX*
+
+additional_local_registry_images:
+  - windse/cyclictest:v1.0
+  - kubernetesui/dashboard:v2.7.0
+  - kubernetesui/metrics-scraper:v1.0.8

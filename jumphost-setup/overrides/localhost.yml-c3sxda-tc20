@@ -24,3 +24,9 @@ cluster_service_subnet: "fd00:4888:2000:109b::/112"
 
 admin_password: St8rlingX*
 ansible_become_pass: St8rlingX*
+
+
+additional_local_registry_images:
+  - windse/cyclictest:v1.0
+  - kubernetesui/dashboard:v2.7.0
+  - kubernetesui/metrics-scraper:v1.0.8
