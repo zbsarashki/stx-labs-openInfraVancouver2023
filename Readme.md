@@ -1,39 +1,50 @@
-## OpenInfra Summit Vancouver 2023 StarlingX
-### Project Workspaces
+# OpenInfra Summit Vancouver 2023 StarlingX
 
-Login to the controller node: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for ***Port numbers***
+
+## Getting Started
+
+For this hands on the machines have been pre-installed in order to save time.  The image we used is located at the [StarlingX Mirror Sites](http://mirror.starlingx.cengn.ca/mirror/starlingx/release/).
+
+### Validated access to a machine
+
+Login to the node: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for ***Port numbers***
 
 ```
 ssh sysadmin@147.75.35.13 -p <SSH PROXY PORT> cat /etc/build.info
 Password: St8rlingX*
 ```
 ---
-#### AIO-Simplex
-[StarlingX AIO-SX Install Guide](https://docs.starlingx.io/r/stx.8.0/deploy_install_guides/release/bare_metal/aio_simplex_install_kubernetes.html)
 
-Install and bootstrap overview:
+## AIO-Simplex Steps
+The [StarlingX AIO-SX Install Guide](https://docs.starlingx.io/r/stx.8.0/deploy_install_guides/release/bare_metal/aio_simplex_install_kubernetes.html) provides details for installing an AIO SX.  The steps required are listed below.
+
+Steps :
+
 1. Prep the node for Installation<br/>
-2. Install StarlingX on node<br/>
-3. Bootstrap controller node<br/>
-  3.1 Create localhost.yml override file<br/>
-  3.2 Run ansible-playbook<br/>
-4. Configure controller node<br/>
-5. Unlock controller node<br/>
+2. Install StarlingX on Controller-0<br/>
+3. Bootstrap Controller-0<br/>
+  3.1. Create localhost.yml override file<br/>
+  3.2. Run ansible-playbook<br/>
+4. Configure Controller-0<br/>
+5. Unlock Controller-0<br/>
 
-For the purpose of time, steps 1 and 2 have been completed.
+**For the purpose of time, steps 1 and 2 have been completed.**
 
-### Bootstraping
+### From the Controller, Bootstrap the system
 
-***You must be sysadmin***
+>NOTE: You must be `sysadmin` the password is `St8rlingX*`
 	
-The ansible bootstrap process checks the /home/sysadmin/loclhost.yml for the override values (more on this after we start the ansible-playbook). Make sure this file exists on your controller and then run the playbook.
+The ansible bootstrap process checks the /home/sysadmin/loclhost.yml for the override values
+ (more on this after we start the ansible-playbook). Make sure this file exists on your controller and then run the playbook.
 
 ```
 export ANSIBLE_LOG_PATH=~/ansible_$(date "+%Y%m%d%H%M%S").log
 time ansible-playbook /usr/share/ansible/stx-ansible/playbooks/bootstrap.yml
 ```
 
-Expected results:
+#### Bootstrap Expected results:
+
+Below is the final output of the playbook.  Note 0 failed plays
 
 ```
 real    33m1.924s
@@ -67,11 +78,11 @@ bootstrap/bringup-essential-services : Load image from archive /opt/platform-bac
 bootstrap/bringup-essential-services : Pause a few seconds for docker to clean up its temp directory -- 10.02s
 ```
 
+### About the ansible override file: /home/sysadmin/localhost.yml
 
-
-### Ansible override file: /home/sysadmin/localhost.yml
-
-This file overrides default values found in /usr/share/ansible/stx-ansible/playbooks/host_vars/bootstrap/default.yml. For the purposes of this workshop, we are overriding system and network properties.
+This file overrides default values found in `/usr/share/ansible/stx-ansible/playbooks/host_vars/bootstrap/default.yml`. 
+For the purposes of this workshop, we are overriding system and network properties anything in the `default.yml` file can be overridden in the localhost.yml file.  
+By default the localhost.yml file is expected to be in the `/home/sysadmin` directory.
 
 ```
 system_mode: simplex
@@ -107,20 +118,25 @@ additional_local_registry_images:
   - kubernetesui/metrics-scraper:v1.0.8
 ```
 
-
-
-### Configure controller-0
+### From the Controller, Configure controller-0
 
 In this step we will configure the node for the hands-on labs. To this end, we will configure the system with Persistent storage, and isolated CPU's.<br/>
-#### Step 0: OAM network address
 
+#### From the Controller, Configure the OAM network address
+For a AIO Simplex the [networking](https://docs.starlingx.io/planning/kubernetes/networks-for-a-simplex-system.html)  is very simple.  All that is required to define is the OAM.  The MGMT and Cluster host are automatically assigned to the loopback interface.
 
-Source the environment: ` source /etc/platform/openrc`
+- Source the environment: ` source /etc/platform/openrc`
 
-Determine the OAM interface: `ip -6 r  | grep ^default`<br/>
-Identify OAM Interface: `default via 2604:1380:4642:a300::151 dev enp1s0f0 metric 1024 onlink pref medium`
+- Determine the OAM device interface: 
+```
+ip -6 r  | grep ^default
+default via 2604:1380:4642:a300::151 dev enp1s0f0 metric 1024 onlink pref medium
+```
 
-***Next, assign network interface to OAM network***
+**Use the above output to get set the OAMIF below**
+
+- Assign network interface to OAM network
+
 ```
 OAMIF=enp1s0f0
 
@@ -131,63 +147,72 @@ system ntp-modify ntpservers=0.pool.ntp.org,1.pool.ntp.org
 
 #### Unlock controller
 
+Unlocking the host will reboot the system and apply the configuration provided.  
+
+>NOTE: In other scenarios more configuration can be applied before the unlock.  For example configuration data networks, huge pages, persistent storage, and CPU isolated cores.
+
 ```
-[sysadmin@controller-0 ~(keystone_admin)]$ system host-unlock controller-0
-+------------------------+---------------------------------------------+
-| Property               | Value                                       |
-+------------------------+---------------------------------------------+
-| action                 | none                                        |
-| administrative         | locked                                      |
-| apparmor               | disabled                                    |
-| availability           | online                                      |
-| bm_ip                  | None                                        |
-| bm_type                | none                                        |
-| bm_username            | None                                        |
-| boot_device            | /dev/disk/by-path/pci-0000:00:17.0-ata-1.0  |
-| capabilities           | {'is_max_cpu_configurable': 'configurable'} |
-| clock_synchronization  | ntp                                         |
-| config_applied         | 56f0f83e-d506-42d4-8563-6392d6fde791        |
-| config_status          | None                                        |
-| config_target          | d7d4468a-6c00-469d-b994-1dbc1c58e11f        |
-| console                | ttyS1,115200                                |
-| created_at             | 2023-06-12T23:56:47.063443+00:00            |
-| device_image_update    | None                                        |
-| hostname               | controller-0                                |
-| id                     | 1                                           |
-| install_output         | graphical                                   |
-| install_state          | None                                        |
-| install_state_info     | None                                        |
-| inv_state              | inventoried                                 |
-| invprovision           | provisioning                                |
-| location               | {}                                          |
-| max_cpu_mhz_allowed    | 5000                                        |
-| max_cpu_mhz_configured | None                                        |
-| mgmt_ip                | fd00:4888:2000:1090::b                      |
-| mgmt_mac               | 00:00:00:00:00:00                           |
-| operational            | disabled                                    |
-| personality            | controller                                  |
-| reboot_needed          | False                                       |
-| reserved               | False                                       |
-| rootfs_device          | /dev/disk/by-path/pci-0000:00:17.0-ata-1.0  |
-| serialid               | None                                        |
-| software_load          | 22.12                                       |
-| subfunction_avail      | online                                      |
-| subfunction_oper       | disabled                                    |
-| subfunctions           | controller,worker,lowlatency                |
-| task                   | Unlocking                                   |
-| tboot                  |                                             |
-| ttys_dcd               | False                                       |
-| updated_at             | 2023-06-13T03:43:43.538745+00:00            |
-| uptime                 | 14384                                       |
-| uuid                   | 9104025f-8697-4ad0-99ed-e88a3401d5c9        |
-| vim_progress_status    | None                                        |
-+------------------------+---------------------------------------------+
+system host-unlock controller-0
 ```
 
-Unlocking the host will reboot the system and apply the configuration. 
+#### Verify the System us unlocked and in a good state
 
+> NOTE: This will take a few minutes after the reboot to finish initializing
+
+```
+source /etc/platform/openrc
+system host-list
+```
+
+##### Expected output
+```
++----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+
+```
+
+### Verify the system is alarm free
+
+> If alarms exist the `fm alarm-list` command will follow up with the alarms.  If no alarms are present nothing will show.
+
+```
+source /etc/platform/openrc
+fm alarm-list
+
+```
+
+### See what kubernetes pods are running
+
+```
+kubectl get pods -A
+```
+
+#### Expected Output
+
+```
+NAMESPACE              NAME                                              READY   STATUS    RESTARTS       AGE
+armada                 armada-api-5547f9c8d5-qd9pd                       2/2     Running   2 (6d7h ago)   6d7h
+cert-manager           cm-cert-manager-6c47f6d6f5-9hcgh                  1/1     Running   1 (6d7h ago)   6d7h
+cert-manager           cm-cert-manager-cainjector-6f8dc8f64d-wjktw       1/1     Running   1 (6d7h ago)   6d7h
+cert-manager           cm-cert-manager-webhook-556b7d64d8-ph6s7          1/1     Running   1 (6d7h ago)   6d7h
+flux-helm              helm-controller-759b895dbb-chbrb                  1/1     Running   1 (6d7h ago)   6d7h
+flux-helm              source-controller-7f4bb65f88-gs7xg                1/1     Running   1 (6d7h ago)   6d7h
+kube-system            calico-kube-controllers-567d594786-qsbv2          1/1     Running   1 (6d7h ago)   6d7h
+kube-system            calico-node-dvmbr                                 1/1     Running   1 (6d7h ago)   6d7h
+kube-system            coredns-78dd5d75bd-bhncn                          1/1     Running   1 (6d7h ago)   6d7h
+kube-system            ic-nginx-ingress-ingress-nginx-controller-s6jpg   1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-apiserver-controller-0                       1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-controller-manager-controller-0              1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-multus-ds-amd64-d2t4j                        1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-proxy-tbklg                                  1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-scheduler-controller-0                       1/1     Running   1 (6d7h ago)   6d7h
+kube-system            kube-sriov-cni-ds-amd64-fzzqd                     1/1     Running   1 (6d7h ago)   6d7h
+```
+
+## Next Exercises
 ---
-
 - [StarlingX Management overview](AIO-SX-On-Equinix/Familiarization-of-StarlingX-Management.md)
 - [Cyclic Test](AIO-SX-On-Equinix/app-cyclictest.md)
 - [StarlingX Hello World](AIO-SX-On-Equinix/app-hello-starlingx.md)
@@ -195,12 +220,15 @@ Unlocking the host will reboot the system and apply the configuration.
 - [Persistent Storage](AIO-SX-On-Equinix/app-hello-persistent-storage.md)
 - [Install Matrix Server](https://docs.starlingx.io/admintasks/kubernetes/kubernetes-admin-tutorials-metrics-server.html)
 ---
-Left as exercise:
+
+## Exercises for Home
 ---
-- StarlingX on [libvirt](libvirt/README.md) 
-- StarlingX on [virtualbox](virtualbox/readme.md)
+- Running StarlingX on [libvirt](libvirt/README.md) 
+- Running StarlingX on [virtualbox](virtualbox/readme.md)
 ---
-Workspace setup:
+
+
+## Hands On Setup
 ---
 1) Equinix Metal [starlingX hands-on Workspace setup](equinix-metal-setup/using_equinix_metal.md)
 2) Access [StarlingX Targets](jumphost-setup/jumphost-targets.md) through [Jumphost](jumphost-setup/jump-host.md)
