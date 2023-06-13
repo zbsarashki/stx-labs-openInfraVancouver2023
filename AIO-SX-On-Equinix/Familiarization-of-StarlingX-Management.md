@@ -13,7 +13,7 @@ Useful links:
 
 ## Log in to the GUI
 
-Open a browser and go to the assigned address from the class.  
+Open a browser and go to the assigned [HTTP proxy port](../jumphost-setup/jumphost-targets.md) address from the class.  For example `http://147.75.35.13:8801`
 
 > Note: Normally this would be the floating IP address and port 8080.
 
@@ -88,7 +88,7 @@ View Events
 
 ## Log in to the SSH
 
-To log in using SSH use the assigned address.  For example `ssh sysadmin@147.75.35.13 -p 2201`  The username is `sysadmin` password is `St8rlingX*`
+To log in using assigned [SSH proxy port](../jumphost-setup/jumphost-targets.md).  For example `ssh sysadmin@147.75.35.13 -p 2201`  The username is `sysadmin` password is `St8rlingX*`
 
 ```
 Release 22.12

@@ -4,6 +4,8 @@ This is a very simple example of how to expose node port from the primary CNI to
 
 # Copy the files to the controller
 
+ Using the assigned [SSH proxy port](../jumphost-setup/jumphost-targets.md) copy the yaml files
+
 For example:
 
 ```
@@ -32,7 +34,7 @@ kubectl apply -f nodeport.yaml
 ```
 
 # Validate
-Validate the container is accessible by using curl or a browser to access the container
+Validate the container is running and accessible
 
 ## Verify the containers are running
 
@@ -47,7 +49,7 @@ hellodeployment-8d95c89db-vdgjj   1/1     Running   0          8s
 
 ```
 IP=$(source /etc/platform/openrc;system oam-show |grep oam_ip | awk '{ print $4 }')
-curl http://$IP:30001
+curl -6  http://[$IP]:30001
 ```
 
 ### Example Output
@@ -57,7 +59,7 @@ curl http://$IP:30001
 ```
 
 ## Using Web Browser from a machine that can access the Cloud
-Open a web browser to the floating IP Address (http://<Controller FIP>:31115
+Open a web browser and go to the [port your machine is assigned](../jumphost-setup/jumphost-targets.md) to for hello  `http:147.75.35.13:31003`
 
 ![Image missing](images/app-helloworld-web.png)
 

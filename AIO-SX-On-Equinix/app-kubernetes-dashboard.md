@@ -18,38 +18,20 @@ kubectl -n kubernetes-dashboard create secret docker-registry admin-registry-sec
 # Create the pod
 
 ## Copy the yaml file to the controller
+Using the assigned [SSH proxy port](../jumphost-setup/jumphost-targets.md) copy the yaml files
 
 For Example
 ```
-scp -P 2201 yamls/app-kubernetes-dashboard/recommended.yaml sysadmin@147.75.35.13:.
+scp -P 2201 yamls/app-kubernetes-dashboard/*.yaml sysadmin@147.75.35.13:.
+
 ```
 
-## Create the pod
+## From the Controller, Create the pod
 ```
 kubectl apply -f recommended.yaml
 ```
 
-## Create a patch that changes the  kubernetes-dashboard service to use a NodePort 
-
-```
-cat << EOF > nodeport_patch.yaml
-spec:
-  ports:
-  - nodePort: 30000
-    port: 443
-    protocol: TCP
-    targetPort: 8443
-  type: NodePort
-EOF
-```
-
-## Apply the patch
-
-```
-kubectl -n kubernetes-dashboard patch svc kubernetes-dashboard --patch-file nodeport_patch.yaml
-```
-
-### Verify the patch applied
+### From the Controller, Verify the pods are in good health
 
 If the kubernetes-dashboard line below shows TYPE NodePort and PORT(S) 443:30000 then the patch applied correctly
 
@@ -60,47 +42,18 @@ dashboard-metrics-scraper   ClusterIP   10.12.92.149   <none>        8000/TCP   
 kubernetes-dashboard        NodePort    10.7.148.78    <none>        443:30000/TCP   5m3s
 ```
 
-# Create admin user yaml file
-```
-cat << EOF > adminuser.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
-EOF
-```
-
-## Apply the admin user
+## From the Controller, Apply the admin user
 
 ```
 kubectl apply -f adminuser.yaml
 ```
 
-# Create an Admin Rolebinding
-```
-cat <<EOF > dashboard-admin-rolebinding.yaml 
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
-EOF
-```
-
-## Apply the Role Binding
+## From the Controller, Apply the Role Binding
 ```
 kubectl -n kubernetes-dashboard create -f dashboard-admin-rolebinding.yaml 
 ```
 
-# Get the token
+# From the Controller, Get the Admin token
 ```
 kubectl -n kubernetes-dashboard create token admin-user
 ```
@@ -114,7 +67,11 @@ dGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2Fy
 
 # Using Web Browser from a machine that can access the Cloud
 
-- Open a web browser to the Floating IP (FIP) and port 30000 (https://**controller FIP**:30000
+- Open a web browser and got to the https://147.75.35.13 use the [K8Dashboard port](../jumphost-setup/jumphost-targets.md).  
+
+  For example `https://147.75.35.13:30100`
+
+> NOTE: Normally this is the floating IP (FIP) and port 30000 (https://**controller FIP**:30000
 
 - Select accept to accept security risk
 
@@ -138,17 +95,4 @@ dGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2Fy
 kubectl delete -f adminuser.yaml
 kubectl delete -n  kubernetes-dashboard -f dashboard-admin-rolebinding.yaml 
 kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
-```
-
-
-# Additionl Notes
-
-## Get the current version of the yaml file 
-```
-VER=$(curl -s https://api.github.com/repos/kubernetes/dashboard/releases/latest|grep tag_name|cut -d '"' -f 4)
-```
-
-## Download the yaml file
-```
-wget https://raw.githubusercontent.com/kubernetes/dashboard/$VER/aio/deploy/recommended.yaml
 ```
