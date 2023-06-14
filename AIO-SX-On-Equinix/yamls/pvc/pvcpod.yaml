@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvc
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  selector:
+    matchLabels:
+      run: pvc
+  template:
+    metadata:
+      labels:
+        run: pvc
+    spec:
+      containers:
+      - args:
+        - sh
+        image: registry.local:9001/docker.io/debian:bullseye
+        imagePullPolicy: IfNotPresent
+        name: busybox
+        stdin: true
+        tty: true
+        volumeMounts:
+        - name: pvc1
+          mountPath: "/mnt1"
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: admin-registry-secret
+      volumes:
+      - name: pvc1
+        persistentVolumeClaim:
+          claimName: test-claim1
