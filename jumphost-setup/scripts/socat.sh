@@ -127,3 +127,57 @@ socat TCP4-LISTEN:2220,fork,su=nobody TCP6:[2604:1380:4642:a300::172]:22 &
 socat TCP4-LISTEN:8820,fork,su=nobody TCP6:[2604:1380:4642:a300::172]:8080 &
 socat TCP4-LISTEN:32000,fork,su=nobody TCP6:[2604:1380:4642:a300::172]:30000 &
 socat TCP4-LISTEN:32001,fork,su=nobody TCP6:[2604:1380:4642:a300::172]:30001 &
+#
+#c3sxda-tc21
+socat TCP4-LISTEN:2221,fork,su=nobody TCP6:[2604:1380:4642:a300::1c2]:22 &
+socat TCP4-LISTEN:8821,fork,su=nobody TCP6:[2604:1380:4642:a300::1c2]:8080 &
+socat TCP4-LISTEN:32100,fork,su=nobody TCP6:[2604:1380:4642:a300::1c2]:30000 &
+socat TCP4-LISTEN:32101,fork,su=nobody TCP6:[2604:1380:4642:a300::1c2]:30001 &
+#
+#c3sxda-tc22
+socat TCP4-LISTEN:2222,fork,su=nobody TCP6:[2604:1380:4642:a300::182]:22 &
+socat TCP4-LISTEN:8822,fork,su=nobody TCP6:[2604:1380:4642:a300::182]:8080 &
+socat TCP4-LISTEN:32200,fork,su=nobody TCP6:[2604:1380:4642:a300::182]:30000 &
+socat TCP4-LISTEN:32201,fork,su=nobody TCP6:[2604:1380:4642:a300::182]:30001 &
+#
+#c3sxda-tc23
+socat TCP4-LISTEN:2223,fork,su=nobody TCP6:[2604:1380:4642:a300::1a2]:22 &
+socat TCP4-LISTEN:8823,fork,su=nobody TCP6:[2604:1380:4642:a300::1a2]:8080 &
+socat TCP4-LISTEN:32300,fork,su=nobody TCP6:[2604:1380:4642:a300::1a2]:30000 &
+socat TCP4-LISTEN:32301,fork,su=nobody TCP6:[2604:1380:4642:a300::1a2]:30001 &
+#
+#c3sxda-tc24
+socat TCP4-LISTEN:2224,fork,su=nobody TCP6:[2604:1380:4642:a300::1d2]:22 &
+socat TCP4-LISTEN:8824,fork,su=nobody TCP6:[2604:1380:4642:a300::1d2]:8080 &
+socat TCP4-LISTEN:32400,fork,su=nobody TCP6:[2604:1380:4642:a300::1d2]:30000 &
+socat TCP4-LISTEN:32401,fork,su=nobody TCP6:[2604:1380:4642:a300::1d2]:30001 &
+#
+#c3sxda-tc25
+socat TCP4-LISTEN:2225,fork,su=nobody TCP6:[2604:1380:4642:a300::192]:22 &
+socat TCP4-LISTEN:8825,fork,su=nobody TCP6:[2604:1380:4642:a300::192]:8080 &
+socat TCP4-LISTEN:32500,fork,su=nobody TCP6:[2604:1380:4642:a300::192]:30000 &
+socat TCP4-LISTEN:32501,fork,su=nobody TCP6:[2604:1380:4642:a300::192]:30001 &
+#
+#c3sxda-tc26
+socat TCP4-LISTEN:2226,fork,su=nobody TCP6:[2604:1380:4642:a300::1b2]:22 &
+socat TCP4-LISTEN:8826,fork,su=nobody TCP6:[2604:1380:4642:a300::1b2]:8080 &
+socat TCP4-LISTEN:32600,fork,su=nobody TCP6:[2604:1380:4642:a300::1b2]:30000 &
+socat TCP4-LISTEN:32601,fork,su=nobody TCP6:[2604:1380:4642:a300::1b2]:30001 &
+#
+#c3sxda-tc27
+socat TCP4-LISTEN:2227,fork,su=nobody TCP6:[2604:1380:4642:a300::1f2]:22 &
+socat TCP4-LISTEN:8827,fork,su=nobody TCP6:[2604:1380:4642:a300::1f2]:8080 &
+socat TCP4-LISTEN:32700,fork,su=nobody TCP6:[2604:1380:4642:a300::1f2]:30000 &
+socat TCP4-LISTEN:32701,fork,su=nobody TCP6:[2604:1380:4642:a300::1f2]:30001 &
+#
+#c3sxda-tc28
+socat TCP4-LISTEN:2228,fork,su=nobody TCP6:[2604:1380:4642:a300::1e2]:22 &
+socat TCP4-LISTEN:8828,fork,su=nobody TCP6:[2604:1380:4642:a300::1e2]:8080 &
+socat TCP4-LISTEN:32800,fork,su=nobody TCP6:[2604:1380:4642:a300::1e2]:30000 &
+socat TCP4-LISTEN:32801,fork,su=nobody TCP6:[2604:1380:4642:a300::1e2]:30001 &
+#
+#c3sxda-tc29
+socat TCP4-LISTEN:2229,fork,su=nobody TCP6:[2604:1380:4642:a300::202]:22 &
+socat TCP4-LISTEN:8829,fork,su=nobody TCP6:[2604:1380:4642:a300::202]:8080 &
+socat TCP4-LISTEN:32900,fork,su=nobody TCP6:[2604:1380:4642:a300::202]:30000 &
+socat TCP4-LISTEN:32901,fork,su=nobody TCP6:[2604:1380:4642:a300::202]:30001 &

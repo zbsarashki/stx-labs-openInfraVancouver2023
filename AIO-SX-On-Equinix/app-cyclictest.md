@@ -76,8 +76,9 @@ system host-lock controller-0
 
 #### Assign labels to node
 
+
 ```
-[sysadmin@controller-0 ~(keystone_admin)]$ system host-label-assign controller-0 kube-cpu-mgr-policy=static
+~(keystone_admin)]$ system host-label-assign controller-0 kube-cpu-mgr-policy=static
 +-------------+--------------------------------------+
 | Property    | Value                                |
 +-------------+--------------------------------------+
@@ -86,7 +87,7 @@ system host-lock controller-0
 | label_key   | kube-cpu-mgr-policy                  |
 | label_value | static                               |
 +-------------+--------------------------------------+
-[sysadmin@controller-0 ~(keystone_admin)]$ system host-label-assign controller-0 kube-topology-mgr-policy=restricted
+~(keystone_admin)]$ system host-label-assign controller-0 kube-topology-mgr-policy=restricted
 +-------------+--------------------------------------+
 | Property    | Value                                |
 +-------------+--------------------------------------+
