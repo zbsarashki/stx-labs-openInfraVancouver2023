@@ -1,0 +1,2 @@
+  - windse/starlingx-nodeinfo:v1.0-v6
+  - openstackhelm/ceph-config-helper:ubuntu_bionic-20220802

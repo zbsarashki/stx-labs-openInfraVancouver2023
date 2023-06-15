@@ -5,14 +5,17 @@
 
 For this hands on the machines have been pre-installed in order to save time.  The image we used is located at the [StarlingX Mirror Sites](http://mirror.starlingx.cengn.ca/mirror/starlingx/release/).
 
-### Validated access to a machine
+### Validate access to a machine
 
-Login to the node: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for ***Port numbers***
+
+Login to the node from ***IPv4*** address: See [StarlingX Target List](jumphost-setup/jumphost-targets.md) for IPv4  ***Port numbers***
 
 ```
 ssh sysadmin@147.75.35.13 -p <SSH PROXY PORT> cat /etc/build.info
 Password: St8rlingX*
 ```
+
+
 ---
 
 ## AIO-Simplex Steps
@@ -133,7 +136,7 @@ ip -6 r  | grep ^default
 default via 2604:1380:4642:a300::151 dev enp1s0f0 metric 1024 onlink pref medium
 ```
 
-**Use the above output to get set the OAMIF below**
+**Use the above output to set the OAMIF below**
 
 - Assign network interface to OAM network
 
@@ -192,23 +195,23 @@ kubectl get pods -A
 #### Expected Output
 
 ```
-NAMESPACE              NAME                                              READY   STATUS    RESTARTS       AGE
-armada                 armada-api-5547f9c8d5-qd9pd                       2/2     Running   2 (6d7h ago)   6d7h
-cert-manager           cm-cert-manager-6c47f6d6f5-9hcgh                  1/1     Running   1 (6d7h ago)   6d7h
-cert-manager           cm-cert-manager-cainjector-6f8dc8f64d-wjktw       1/1     Running   1 (6d7h ago)   6d7h
-cert-manager           cm-cert-manager-webhook-556b7d64d8-ph6s7          1/1     Running   1 (6d7h ago)   6d7h
-flux-helm              helm-controller-759b895dbb-chbrb                  1/1     Running   1 (6d7h ago)   6d7h
-flux-helm              source-controller-7f4bb65f88-gs7xg                1/1     Running   1 (6d7h ago)   6d7h
-kube-system            calico-kube-controllers-567d594786-qsbv2          1/1     Running   1 (6d7h ago)   6d7h
-kube-system            calico-node-dvmbr                                 1/1     Running   1 (6d7h ago)   6d7h
-kube-system            coredns-78dd5d75bd-bhncn                          1/1     Running   1 (6d7h ago)   6d7h
-kube-system            ic-nginx-ingress-ingress-nginx-controller-s6jpg   1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-apiserver-controller-0                       1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-controller-manager-controller-0              1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-multus-ds-amd64-d2t4j                        1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-proxy-tbklg                                  1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-scheduler-controller-0                       1/1     Running   1 (6d7h ago)   6d7h
-kube-system            kube-sriov-cni-ds-amd64-fzzqd                     1/1     Running   1 (6d7h ago)   6d7h
+NAMESPACE      NAME                                             READY  STATUS   RESTARTS      AGE
+armada         armada-api-5547f9c8d5-qd9pd                      2/2    Running  2 (6d7h ago)  6d7h
+cert-manager   cm-cert-manager-6c47f6d6f5-9hcgh                 1/1    Running  1 (6d7h ago)  6d7h
+cert-manager   cm-cert-manager-cainjector-6f8dc8f64d-wjktw      1/1    Running  1 (6d7h ago)  6d7h
+cert-manager   cm-cert-manager-webhook-556b7d64d8-ph6s7         1/1    Running  1 (6d7h ago)  6d7h
+flux-helm      helm-controller-759b895dbb-chbrb                 1/1    Running  1 (6d7h ago)  6d7h
+flux-helm      source-controller-7f4bb65f88-gs7xg               1/1    Running  1 (6d7h ago)  6d7h
+kube-system    calico-kube-controllers-567d594786-qsbv2         1/1    Running  1 (6d7h ago)  6d7h
+kube-system    calico-node-dvmbr                                1/1    Running  1 (6d7h ago)  6d7h
+kube-system    coredns-78dd5d75bd-bhncn                         1/1    Running  1 (6d7h ago)  6d7h
+kube-system    ic-nginx-ingress-ingress-nginx-controller-s6jpg  1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-apiserver-controller-0                      1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-controller-manager-controller-0             1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-multus-ds-amd64-d2t4j                       1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-proxy-tbklg                                 1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-scheduler-controller-0                      1/1    Running  1 (6d7h ago)  6d7h
+kube-system    kube-sriov-cni-ds-amd64-fzzqd                    1/1    Running  1 (6d7h ago)  6d7h
 ```
 
 ## Next Exercises

@@ -76,6 +76,11 @@ system host-lock controller-0
 
 #### Assign labels to node
 
+
+> The static policy allows containers in Guaranteed pods with integer CPU requests access to exclusive CPUs on the node. This exclusivity is enforced using the cpuset cgroup controller.
+See: [Control CPU Management Policies on the Node](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/)
+
+
 ```
 [sysadmin@controller-0 ~(keystone_admin)]$ system host-label-assign controller-0 kube-cpu-mgr-policy=static
 +-------------+--------------------------------------+
